@@ -43,4 +43,11 @@ class AuthController {
 
     sharedPreferences.setString('user-data', jsonEncode(user.toJson()));
   }
+
+  static Future<void> clearUserData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await sharedPreferences.clear();
+    accessToken = null;
+    userData = null;
+  }
 }

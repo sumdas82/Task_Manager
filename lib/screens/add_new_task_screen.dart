@@ -51,7 +51,12 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 200),
+              SizedBox(height: 40),
+              IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: Icon(Icons.arrow_back),
+              ),
+              SizedBox(height: 130),
               Text(
                 'Add New task',
                 style: Theme.of(context).textTheme.titleLarge,
@@ -71,6 +76,13 @@ class _AddNewTaskScreenState extends State<AddNewTaskScreen> {
 
               FilledButton(
                 onPressed: () {
+                  if (titleController.text.trim().isEmpty) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Please enter a title')),
+                    );
+                    return;
+                  }
+
                   createTask();
                 },
                 child: Icon(Icons.arrow_circle_right_outlined, size: 25),

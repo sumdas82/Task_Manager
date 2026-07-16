@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager/controller/auth_controller.dart';
+import 'package:task_manager/screens/login_screen.dart';
 import '../screens/update_profile_screen.dart';
 import '../utils/app_colors.dart';
 
@@ -22,7 +23,7 @@ class TmAppbar extends StatelessWidget implements PreferredSize {
             CircleAvatar(
               radius: 25,
               backgroundImage: NetworkImage(
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrN3fMD9X1_p5b6lRSCGcpDtH9BcgEOsEZLg&s',
+                'https://cdn.ostad.app/public/upload/2023-01-21T05-49-24.235Z-Group2252.png',
               ),
             ),
 
@@ -46,6 +47,20 @@ class TmAppbar extends StatelessWidget implements PreferredSize {
           ],
         ),
       ),
+
+      actions: [
+        IconButton(
+          icon: Icon(Icons.logout, color: Colors.white),
+          onPressed: () async {
+            await AuthController.clearUserData();
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => LoginScreen()),
+              (route) => false,
+            );
+          },
+        ),
+      ],
     );
   }
 
